@@ -49,7 +49,8 @@ def webhook():
 # Auth routes
 @app.get("/users)
 def login():
-    return render_template("users.html", title="Benutzernamen", users=["User a", "User b", "User c"])
+    dbusers = db_read("SELECT username FROM users", ())
+    return render_template("users.html", title="Benutzernamen", users=dbusers)
 
 @app.route("/login", methods=["GET", "POST"])
 @login_required
